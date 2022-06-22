@@ -46,31 +46,23 @@ previous_Y=0;
 touch_Event="";
 function mytouchmove(e){
     console.log(e)
-    current_X=e.touches-canvas.offsetLeft;
-    current_Y=e.touches-canvas.offsetTop;
-    if(touch_Event=="touchdown"){
+    current_X=e.touches[0].clientX-canvas.offsetLeft;
+    current_Y=e.touches[0].clientY-canvas.offsetTop;
     ctx.beginPath();
     ctx.moveTo(previous_X,previous_Y);
     ctx.lineTo(current_X,current_Y);
-    ctx.stroke()}
+    ctx.stroke();
     previous_X=current_X;
     previous_Y=current_Y;
 }
-canvas.addEventListener("touchdown",mytouchdown);
-function mytouchdown(){
-    touch_Event="touchdown";
 
-
-}
-
-
-canvas.addEventListener("touchleave",mytouchleave);
-function mytouchleave(){
-    touch_Event="touchleave";
-}
-canvas.addEventListener("touchup",mytouchup);
-function mytouchup(){
-    Mouse_Event="touchup";
-
-
-}
+canvas.addEventListener("touchstart", my_touchstart);
+    
+    function my_touchstart(e)
+    {
+        current_X = e.touches[0].clientX - canvas.offsetLeft;
+        current_Y = e.touches[0].clientY - canvas.offsetTop;
+        color = document.getElementById("color").value;
+        width_of_line = document.getElementById("width_of_line").value;
+        //Addictonal Activity ends
+    }
